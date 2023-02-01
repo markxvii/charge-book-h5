@@ -21,31 +21,51 @@ export default defineConfig({
       }
     )
   ],
+  css: {
+    modules: {
+      localsConvention: 'dashesOnly'
+    },
+    preprocessorOptions: {
+      less: {
+        // 支持内联 JavaScript
+        javascriptEnabled: true,
+      }
+    }
+  },
   base: '/', // 开发或生产环境服务的公共基础路径
   optimizeDeps: {
     force: true // 强制进行依赖预构建
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src') // 路径别名
+      '@': path.resolve(__dirname, './src'), // 路径别名q
+      'utils': path.resolve(__dirname, 'src/utils') // src 路径'utils': path.resolve(__dirname, 'src/utils') // src 路径
     }
   },
   server: {
     host: true, // 监听所有地址
     proxy: {
-      // 字符串简写写法
-      '/foo': 'http://localhost:4567',
-      // 选项写法
-      '/api': {
-        target: 'http://jsonplaceholder.typicode.com',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '')
+      proxy: {
+        '/api': {
+          // 当遇到 /api 路径时，将其转换成 target 的值
+          target: 'http://api.chennick.wang/api/',
+          changeOrigin: true,
+          rewrite: path => path.replace(/^\/api/, '') // 将 /api 重写为空
+        }
       },
-      // Proxying websockets or socket.io
-      '/socket.io': {
-        target: 'ws://localhost:3000',
-        ws: true
-      }
+      // // 字符串简写写法
+      // '/foo': 'http://localhost:4567',
+      // // 选项写法
+      // '/api': {
+      //   target: 'http://jsonplaceholder.typicode.com',
+      //   changeOrigin: true,
+      //   rewrite: (path) => path.replace(/^\/api/, '')
+      // },
+      // // Proxying websockets or socket.io
+      // '/socket.io': {
+      //   target: 'ws://localhost:3000',
+      //   ws: true
+      // }
     }
   },
   build: {
