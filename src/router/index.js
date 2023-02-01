@@ -1,18 +1,21 @@
-import React from "react";
-
-const Index = React.lazy(() => import('@/container/Index/index'));
-const About = React.lazy(() => import('@/container/About/index'));
-
+// router/index.js
+import Home from '@/container/Home'
+import Data from '@/container/Data'
+import User from '@/container/User'
 
 const routes = [
   {
-    path: '/',
-    component: Index
+    path: "/",
+    component: Home
   },
   {
-    path: '/about',
-    component: About
+    path: "/data",
+    component: Data
+  },
+  {
+    path: "/user",
+    component: User
   }
-]
+];
 
 export default routes

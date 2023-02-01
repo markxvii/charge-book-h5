@@ -4,31 +4,37 @@ import './App.css'
 import {
   Routes,
   BrowserRouter as Router,
-  Route
+  Route, BrowserRouter
 } from "react-router-dom";
 import routes from '@/router'
 
 import {ConfigProvider} from 'zarm'
+import NavBar from "@/components/NavBar/index.jsx";
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <ConfigProvider primaryColor={'#007fff'}>
-      <Routes>
-        {
-          routes.map((route) => {
-            return (
-              <Route
-                key={route.path}
-                path={route.path}
-                element={<route.component/>}
-              />
-            )
-          })
-        }
-      </Routes>
-    </ConfigProvider>
+    <BrowserRouter>
+      <ConfigProvider primaryColor={'#007fff'}>
+        <>
+          <Routes>
+            {
+              routes.map((route) => {
+                return (
+                  <Route
+                    key={route.path}
+                    path={route.path}
+                    element={<route.component/>}
+                  />
+                )
+              })
+            }
+          </Routes>
+          <NavBar showNav={true}/>
+        </>
+      </ConfigProvider>
+    </BrowserRouter>
   )
 }
 
