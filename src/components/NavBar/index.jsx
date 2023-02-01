@@ -3,6 +3,7 @@ import s from './style.module.less'
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {TabBar} from "zarm";
+import CustomIcon from "@/components/CustomIcon/index.jsx";
 
 const NavBar = ({showNav}) => {
   const [activeKey, setActiveKey] = useState('/')
@@ -18,14 +19,17 @@ const NavBar = ({showNav}) => {
       <TabBar.Item
         itemKey="/"
         title={'账单'}
+        icon={<CustomIcon type="zhangdan"/>}
       />
       <TabBar.Item
         itemKey="/data"
         title="统计"
+        icon={<CustomIcon type="tongji"/>}
       />
       <TabBar.Item
         itemKey="/user"
         title="我的"
+        icon={<CustomIcon type="wode"/>}
       />
     </TabBar>
   );
